@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class UsedVehicleCreationShouldTest {
+public class UsedVehicleListingCreationShouldTest {
 
     private Long      vehicleId;
     private String    vehicleType;
@@ -45,7 +45,7 @@ public class UsedVehicleCreationShouldTest {
 
     @Test
     void create_used_vehicle_with_all_required_properties() {
-        var constructedUsedVehicle = new UsedVehicle(
+        var constructedUsedVehicle = new UsedVehicleListing(
                 vehicleId, vehicleType, vehicleBrand, vehicleModel, vehicleModelYear,
                 vehicleEntryIntoService, vehicleFuel, vehicleGearBox, vehicleColor,
                 vehicleHorsePower, vehicleDoorCount, vehicleSeatCount, vehicleCondition,
@@ -70,7 +70,7 @@ public class UsedVehicleCreationShouldTest {
 
     @Test
     void fluently_build_used_vehicle_with_all_required_properties() {
-        var builtUsedVehicle = UsedVehicle.builder()
+        var builtUsedVehicle = UsedVehicleListing.builder()
                 .id(vehicleId)
                 .type(vehicleType)
                 .brand(vehicleBrand)

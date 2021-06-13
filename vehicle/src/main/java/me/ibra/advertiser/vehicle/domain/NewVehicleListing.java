@@ -2,7 +2,7 @@ package me.ibra.advertiser.vehicle.domain;
 
 import lombok.Builder;
 
-public record NewVehicle(
+public record NewVehicleListing(
         Long    id,
         String  type,
         String  brand,
@@ -14,8 +14,8 @@ public record NewVehicle(
         Integer horsePower,
         Integer doorCount,
         Integer seatCount,
-        String  description) implements Vehicle {
+        String  description) implements VehicleListing {
 
     @Builder
-    public NewVehicle {}
+    public NewVehicleListing {}
 }

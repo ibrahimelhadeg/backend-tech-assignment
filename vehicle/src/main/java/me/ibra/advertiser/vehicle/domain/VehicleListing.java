@@ -1,6 +1,6 @@
 package me.ibra.advertiser.vehicle.domain;
 
-public interface Vehicle {
+public interface VehicleListing {
 
     Long      id();
     String    type();

@@ -4,7 +4,7 @@ import java.time.YearMonth;
 
 import lombok.Builder;
 
-public record UsedVehicle(
+public record UsedVehicleListing(
         Long      id,
         String    type,
         String    brand,
@@ -19,8 +19,8 @@ public record UsedVehicle(
         Integer   seatCount,
         String    condition,
         Long      mileage,
-        String    description) implements Vehicle {
+        String    description) implements VehicleListing {
 
     @Builder
-    public UsedVehicle {}
+    public UsedVehicleListing {}
 }

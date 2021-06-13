@@ -5,13 +5,13 @@ import java.time.YearMonth;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import me.ibra.advertiser.vehicle.domain.NewVehicle;
-import me.ibra.advertiser.vehicle.domain.UsedVehicle;
+import me.ibra.advertiser.vehicle.domain.NewVehicleListing;
+import me.ibra.advertiser.vehicle.domain.UsedVehicleListing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class VehicleInMemoryStoreShouldTest {
+public class VehicleListingInMemoryStoreShouldTest {
 
     private Long      newVehicleId;
     private Long      usedVehicleId;
@@ -29,7 +29,7 @@ public class VehicleInMemoryStoreShouldTest {
     private String    vehicleCondition;
     private Long      vehicleMileage;
 
-    private VehicleInMemoryStore vehicleStore;
+    private VehicleListingInMemoryStore vehicleStore;
 
     @BeforeEach
     void prepare_ForUsedVehicle() {
@@ -48,12 +48,12 @@ public class VehicleInMemoryStoreShouldTest {
         vehicleSeatCount = 5;
         vehicleCondition = "Very Good";
         vehicleMileage = 30995L;
-        vehicleStore = new VehicleInMemoryStore();
+        vehicleStore = new VehicleListingInMemoryStore();
     }
 
     @Test
     void should_get_new_vehicle_by_id() {
-        var vehicleOfIdOne = (NewVehicle) vehicleStore.findById(newVehicleId);
+        var vehicleOfIdOne = (NewVehicleListing) vehicleStore.findById(newVehicleId);
 
         assertEquals(newVehicleId, vehicleOfIdOne.id());
         assertEquals(vehicleType, vehicleOfIdOne.type());
@@ -71,7 +71,7 @@ public class VehicleInMemoryStoreShouldTest {
 
     @Test
     void should_get_used_vehicle_by_id() {
-        var vehicleOfIdOne = (UsedVehicle) vehicleStore.findById(usedVehicleId);
+        var vehicleOfIdOne = (UsedVehicleListing) vehicleStore.findById(usedVehicleId);
 
         assertEquals(usedVehicleId, vehicleOfIdOne.id());
         assertEquals(vehicleType, vehicleOfIdOne.type());

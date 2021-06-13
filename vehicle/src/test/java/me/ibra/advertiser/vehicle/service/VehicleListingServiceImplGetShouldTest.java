@@ -5,9 +5,9 @@ import java.time.YearMonth;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import me.ibra.advertiser.vehicle.domain.NewVehicle;
-import me.ibra.advertiser.vehicle.domain.UsedVehicle;
-import me.ibra.advertiser.vehicle.store.VehicleStore;
+import me.ibra.advertiser.vehicle.domain.NewVehicleListing;
+import me.ibra.advertiser.vehicle.domain.UsedVehicleListing;
+import me.ibra.advertiser.vehicle.store.VehicleListingStore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class VehicleServiceGetShouldTest {
+public class VehicleListingServiceImplGetShouldTest {
     private Long      newVehicleId;
     private Long      usedVehicleId;
     private String    vehicleType;
@@ -32,7 +32,7 @@ public class VehicleServiceGetShouldTest {
     private String    vehicleCondition;
     private Long      vehicleMileage;
 
-    private VehicleService vehicleService;
+    private VehicleListingServiceImpl vehicleListingServiceImpl;
 
     @BeforeEach
     void prepare_vehicles() {
@@ -52,16 +52,16 @@ public class VehicleServiceGetShouldTest {
         vehicleCondition = "Very Good";
         vehicleMileage = 30995L;
 
-        VehicleStore vehicleStore = mock(VehicleStore.class);
-        when(vehicleStore.findById(newVehicleId)).thenReturn(
-                NewVehicle.builder()
+        VehicleListingStore vehicleListingStore = mock(VehicleListingStore.class);
+        when(vehicleListingStore.findById(newVehicleId)).thenReturn(
+                NewVehicleListing.builder()
                         .id(newVehicleId).type(vehicleType).brand(vehicleBrand)
                         .model(vehicleModel).modelYear(vehicleModelYear).fuel(vehicleFuel)
                         .gearBox(vehicleGearBox).color(vehicleColor).horsePower(vehicleHorsePower)
                         .doorCount(vehicleDoorCount).seatCount(vehicleSeatCount)
                         .build());
-        when(vehicleStore.findById(usedVehicleId)).thenReturn(
-                UsedVehicle.builder()
+        when(vehicleListingStore.findById(usedVehicleId)).thenReturn(
+                UsedVehicleListing.builder()
                         .id(usedVehicleId).type(vehicleType).brand(vehicleBrand)
                         .model(vehicleModel).modelYear(vehicleModelYear)
                         .entryIntoService(vehicleEntryIntoService).fuel(vehicleFuel)
@@ -69,12 +69,12 @@ public class VehicleServiceGetShouldTest {
                         .doorCount(vehicleDoorCount).seatCount(vehicleSeatCount)
                         .condition(vehicleCondition).mileage(vehicleMileage)
                         .build());
-        vehicleService = new VehicleService(vehicleStore);
+        vehicleListingServiceImpl = new VehicleListingServiceImpl(vehicleListingStore);
     }
 
     @Test
     void should_get_new_vehicle_by_id() {
-        var vehicleOfIdOne = (NewVehicle) vehicleService.getVehicle(newVehicleId);
+        var vehicleOfIdOne = (NewVehicleListing) vehicleListingServiceImpl.getVehicle(newVehicleId);
 
         assertEquals(newVehicleId, vehicleOfIdOne.id());
         assertEquals(vehicleType, vehicleOfIdOne.type());
@@ -92,7 +92,7 @@ public class VehicleServiceGetShouldTest {
 
     @Test
     void should_get_used_vehicle_by_id() {
-        var vehicleOfIdOne = (UsedVehicle) vehicleService.getVehicle(usedVehicleId);
+        var vehicleOfIdOne = (UsedVehicleListing) vehicleListingServiceImpl.getVehicle(usedVehicleId);
 
         assertEquals(usedVehicleId, vehicleOfIdOne.id());
         assertEquals(vehicleType, vehicleOfIdOne.type());
